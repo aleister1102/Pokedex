@@ -1,1 +1,1 @@
-{ "src/**/*.{js,json,scss,hbs}": "prettier --write" }
+{ "**/*.{js,json,scss,hbs}": "prettier --write" }
