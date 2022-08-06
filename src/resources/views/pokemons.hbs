@@ -1,0 +1,21 @@
+<h1>Pokemons</h1>
+<div>
+    <div class='row'>
+        {{#each pokemons}}
+            <div class='col-sm-6 col-lg-4 gy-3'>
+                <div class='card'>
+                    <img
+                        class='card-img-top'
+                        src='{{this.image}}'
+                        alt='{{this.name}}'
+                    />
+                    <div class='card-body'>
+                        <h5 class='card-title'>{{this.name}}</h5>
+                        <p class='card-text'>Type: {{this.type}}</p>
+                        <a href='#' class='btn btn-primary'>More info!</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

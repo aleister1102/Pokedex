@@ -1,8 +1,8 @@
-const newsRouter = require('./news')
+const pokemonsRouter = require('./pokemons')
 const siteRouter = require('./site')
 
 function routing(app) {
-    app.use('/news', newsRouter)
+    app.use('/pokemons', pokemonsRouter)
     app.use('/', siteRouter)
 }
 
