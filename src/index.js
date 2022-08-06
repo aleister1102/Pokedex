@@ -5,7 +5,7 @@ const path = require('path')
 const routing = require('./routes')
 
                 const app = express();
-const port = 3000
+                    const port = 3000
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))

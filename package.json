@@ -19,6 +19,9 @@
         "url": "https://github.com/marucube35/coding-blog/issues"
     },
     "homepage": "https://github.com/marucube35/coding-blog#readme",
+    "lint-staged": {
+        "src/**/*.{js,json,scss,hbs}": "prettier --write"
+    },
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged"
