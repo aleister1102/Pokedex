@@ -4,7 +4,7 @@ const { engine } = require('express-handlebars')
 const path = require('path')
 const routing = require('./routes')
 
-const app = express()
+                const app = express();
 const port = 3000
 
 // Static files
