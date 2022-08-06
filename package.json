@@ -18,6 +18,11 @@
         "url": "https://github.com/marucube35/coding-blog/issues"
     },
     "homepage": "https://github.com/marucube35/coding-blog#readme",
+    "husky": {
+        "hooks": {
+                                    "pre-commit": "lint-staged"
+        }
+    },
     "dependencies": {
         "express": "^4.18.1"
     },
