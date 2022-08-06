@@ -8,6 +8,10 @@ const port = 3000
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Middleware
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 // HTTP logger
 app.use(morgan('tiny'))
 
@@ -20,9 +24,16 @@ app.set('views', path.join(__dirname, 'resources/views'))
 app.get('/', (req, res) => {
     res.render('home')
 })
-
 app.get('/news', (req, res) => {
+    console.log(req.query)
     res.render('news')
+})
+app.get('/search', (req, res) => {
+    res.render('search')
+})
+app.post('/search', (req, res) => {
+    console.log(req.body)
+    res.send('')
 })
 
 app.listen(port, () => {
