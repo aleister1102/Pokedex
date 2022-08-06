@@ -6,6 +6,7 @@
     "scripts": {
         "start": "nodemon --inspect src/index.js",
         "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
+        "format": "husky",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -20,7 +21,7 @@
     "homepage": "https://github.com/marucube35/coding-blog#readme",
     "husky": {
         "hooks": {
-                                    "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged"
         }
     },
     "dependencies": {
