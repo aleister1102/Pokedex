@@ -35,7 +35,7 @@ class PokemonsController {
     // [POST] /pokemons/store
     store(req, res, next) {
         Pokemon.create(req.body)
-            .then((pokemon) => res.redirect(`/user/stored/pokemons`))
+            .then(() => res.redirect(`/user/stored/pokemons`))
             .catch(next)
     }
 
@@ -60,22 +60,35 @@ class PokemonsController {
     // [DELETE] /pokemons/:id
     delete(req, res, next) {
         Pokemon.delete({ _id: req.params.id })
-            .then((pokemon) => res.redirect('back'))
+            .then(() => res.redirect('back'))
             .catch(next)
     }
 
     // [PATCH] /pokemons/:id/restore
     restore(req, res, next) {
         Pokemon.restore({ _id: req.params.id })
-            .then((pokemon) => res.redirect('back'))
+            .then(() => res.redirect('back'))
             .catch(next)
     }
 
     // [DELETE] /pokemons/:id/force
     forceDelete(req, res, next) {
         Pokemon.deleteOne({ _id: req.params.id })
-            .then((pokemon) => res.redirect('back'))
+            .then(() => res.redirect('back'))
             .catch(next)
+    }
+
+    // [POST] /pokemons/handle-form-operations
+    handleFormOperations(req, res, next) {
+        switch (req.body.operations) {
+            case 'delete':
+                Pokemon.delete({ _id: { $in: req.body.pokemonIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break
+            default:
+                res.json({ message: 'Operaion is invalid' })
+        }
     }
 }
 

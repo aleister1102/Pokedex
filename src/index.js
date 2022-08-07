@@ -4,6 +4,10 @@ const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 var methodOverride = require('method-override')
 
+const { JSDOM } = require('jsdom')
+const { window } = new JSDOM('')
+const $ = require('jquery')(window)
+
 const routing = require('./routers')
 const db = require('./config/db')
 
