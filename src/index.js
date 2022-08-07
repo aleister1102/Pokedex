@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 
-const routing = require('./routes')
+const routing = require('./routers')
 const db = require('./config/db')
 
 // Connect to DB
