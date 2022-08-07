@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
+var methodOverride = require('method-override')
 
 const routing = require('./routers')
 const db = require('./config/db')
@@ -22,8 +23,19 @@ app.use(express.json())
 // HTTP logger
 app.use(morgan('tiny'))
 
+// Method overriding
+app.use(methodOverride('_method'))
+
 // Template engine
-app.engine('hbs', engine({ extname: 'hbs' }))
+app.engine(
+    'hbs',
+    engine({
+        extname: 'hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        },
+    })
+)
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources', 'views'))
 

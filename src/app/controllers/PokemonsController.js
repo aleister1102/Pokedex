@@ -38,6 +38,24 @@ class PokemonsController {
             .then((pokemon) => res.redirect(`/pokemons/${pokemon.slug}`))
             .catch(next)
     }
+
+    // [GET] /pokemons/:id/edit
+    edit(req, res, next) {
+        Pokemon.findById(req.params.id)
+            .then((pokemon) =>
+                res.render('pokemons/edit', {
+                    pokemon: mongooseToObject(pokemon),
+                })
+            )
+            .catch(next)
+    }
+
+    // [PUT] /pokemons/:id
+    update(req, res, next) {
+        Pokemon.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/user/stored/pokemons'))
+            .catch(next)
+    }
 }
 
 module.exports = new PokemonsController()

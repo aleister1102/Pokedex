@@ -1,6 +1,6 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-    <div class='container-fluid'>
-        <a class='navbar-brand' href='#'>Pokedex</a>
+    <div class='container'>
+        <a class='navbar-brand' href='/'>Pokedex</a>
         <button
             class='navbar-toggler'
             type='button'
@@ -13,22 +13,36 @@
             <span class='navbar-toggler-icon'></span>
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-            <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-                <li class='nav-item'>
-                    <a
-                        class='nav-link active'
-                        aria-current='page'
-                        href='/'
-                    >Home</a>
-                </li>
+            <ul class='navbar-nav ms-auto mb-2 mb-lg-0'>
                 <li class='nav-item'>
                     <a class='nav-link' href='/pokemons'>Pokemons</a>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='/pokemons/add'>Add</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='/search'>Search</a>
+
+                <li class='nav-item dropdown'>
+                    <a
+                        class='nav-link dropdown-toggle'
+                        href='#'
+                        role='button'
+                        data-bs-toggle='dropdown'
+                        aria-expanded='false'
+                    >
+                        Username
+                    </a>
+                    <ul class='dropdown-menu dropdown-menu-dark'>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='/pokemons/add'>Add new
+                                pokemon</a>
+
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='/user/stored/pokemons'>My
+                                pokemons</a>
+                        </li>
+                        <div class='dropdown-divider'></div>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='#'>Log out</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

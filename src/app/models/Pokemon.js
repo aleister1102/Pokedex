@@ -13,6 +13,9 @@ const Pokemon = new Schema(
             default:
                 'https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/2015/Tin-Tuc/pokeball.jpg',
         },
+        description: {
+            type: String,
+        },
         slug: { type: String, slug: 'name', unique: true },
     },
     {

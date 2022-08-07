@@ -1,6 +1,6 @@
 <div class='mt-4'>
-    <h3>Add a pokemon</h3>
-    <form method='POST' action='/pokemons/store'>
+    <h3>Edit pokemon</h3>
+    <form method='POST' action='/pokemons/{{pokemon._id}}?_method=PUT'>
         <div class='mb-3'>
             <label for='pokemon-name' class='form-label'>Name</label>
             <input
@@ -8,6 +8,7 @@
                 class='form-control'
                 id='pokemon-name'
                 name='name'
+                value='{{pokemon.name}}'
             />
         </div>
         <div class='mb-3'>
@@ -17,6 +18,7 @@
                 class='form-control'
                 id='pokemon-type'
                 name='type'
+                value='{{pokemon.type}}'
             />
         </div>
         <div class='mb-3'>
@@ -26,6 +28,7 @@
                 class='form-control'
                 id='pokemon-image'
                 name='image'
+                value='{{pokemon.image}}'
             />
         </div>
         <div class='mb-3'>
@@ -34,13 +37,12 @@
                 class='form-label'
             >Description</label>
             <textarea
-                type='text'
                 class='form-control'
                 id='pokemon-description'
                 name='description'
-            ></textarea>
+            >{{pokemon.description}}</textarea>
         </div>
-        <button type='submit' class='btn btn-primary'>Add</button>
+        <button type='submit' class='btn btn-primary'>Update</button>
     </form>
 
 </div>
