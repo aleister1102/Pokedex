@@ -21,10 +21,71 @@
                             href='/pokemons/{{this._id}}/edit'
                             class='btn btn-link'
                         >Edit</a>
-                        <a href='' class='btn btn-link'>Delete</a>
+                        <a
+                            href=''
+                            class='btn btn-link'
+                            data-bs-toggle='modal'
+                            data-bs-target='#delete-modal'
+                            data-bs-id='{{this._id}}'
+                        >Delete</a>
                     </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+{{! Delete comfirmation }}
+<div id='delete-modal' class='modal' tabindex='-1'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title'>Delete pokemon</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <div class='modal-body'>
+                <p>Are you sure to delete this pokemon?</p>
+            </div>
+            <div class='modal-footer'>
+                <button
+                    type='button'
+                    class='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                >Cancel</button>
+                <button
+                    id='delete-pokemon'
+                    type='button'
+                    class='btn btn-danger'
+                >Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! Hidden delete form }}
+<form id='delete-form' method='POST'></form>
+
+<script>
+    const $ = document.querySelector.bind(document) 
+    const deleteModal = $('#delete-modal') 
+    const deleteForm = $('#delete-form')
+    const deleteButton = $('#delete-pokemon')
+
+    let pokemonId = ''
+
+    deleteModal.addEventListener('show.bs.modal', event => { 
+        const button = event.relatedTarget 
+        pokemonId = button.getAttribute('data-bs-id') 
+    })
+
+    deleteButton.onclick = () => {
+        deleteForm.action = `/pokemons/${pokemonId}?_method=DELETE`
+        deleteForm.submit()
+    } 
+
+</script>

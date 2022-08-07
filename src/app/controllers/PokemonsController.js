@@ -56,6 +56,13 @@ class PokemonsController {
             .then(() => res.redirect('/user/stored/pokemons'))
             .catch(next)
     }
+
+    // [DELETE] /pokemons/:id
+    delete(req, res, next) {
+        Pokemon.deleteOne({ _id: req.params.id })
+            .then((pokemon) => res.redirect('back'))
+            .catch(next)
+    }
 }
 
 module.exports = new PokemonsController()
