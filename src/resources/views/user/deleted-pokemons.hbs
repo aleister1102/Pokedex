@@ -1,7 +1,8 @@
-<div class='mt-4'>
+<div class="mt-4">
     <div>
-        <h1>My pokemons</h1>
-        <a href="/user/trash/pokemons">Deleted pokemons</a>
+        <a href="/user/stored/pokemons">My pokemons</a>
+        <h1>Deleted pokemons</h1>
+
     </div>
 
     <table class='table'>
@@ -10,28 +11,28 @@
                 <th scope='col'>#</th>
                 <th scope='col'>Name</th>
                 <th scope='col'>Type</th>
-                <th scope='col' colspan='2'>Created time</th>
+                <th scope='col' colspan='2'>Deleted time</th>
             </tr>
         </thead>
         <tbody>
-            {{#each pokemons}}
+            {{#each deletedPokemons}}
             <tr>
                 <th scope='row'>{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.type}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
-                    <a href='/pokemons/{{this._id}}/edit' class='btn btn-link'>Edit</a>
+                    <a href='' class='btn btn-link restore-btn' data-id="{{this._id}}">Restore</a>
                     <a href='' class='btn btn-link' data-bs-toggle='modal' data-bs-target='#delete-modal'
-                        data-bs-id='{{this._id}}'>Delete</a>
+                        data-bs-id='{{this._id}}'>Delete permanently</a>
                 </td>
             </tr>
 
             {{else}}
             <tr>
                 <td colspan='5' class="text-center">
-                    You don't have any pokemon.
-                    <a href='/pokemons/add'>Add a new one</a>
+                    Empty.
+                    <a href="/user/stored/pokemons">My pokemons</a>
                 </td>
             </tr>
             {{/each}}
@@ -44,31 +45,51 @@
     <div class='modal-dialog'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <h5 class='modal-title'>Delete pokemon</h5>
+                <h5 class='modal-title'>Delete pokemon permanently</h5>
                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div class='modal-body'>
-                <p>Are you sure to delete this pokemon?</p>
+                <p>This action can not be undone, are you sure to proceed?</p>
             </div>
             <div class='modal-footer'>
                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
-                <button id='delete-button' type='button' class='btn btn-primary'>Delete</button>
+                <button id='delete-button' type='button' class='btn btn-danger'>Delete permanently</button>
             </div>
         </div>
     </div>
 </div>
 
+
+
+{{! Hidden restore form }}
+<form id='restore-form' method='POST'></form>
+
 {{! Hidden delete form }}
 <form id='delete-form' method='POST'></form>
 
-{{!-- Handle buttons --}}
+{{! Handle buttons }}
 <script>
     const $ = document.querySelector.bind(document)
+    const $$ = document.querySelectorAll.bind(document)
+
+    let pokemonId = ''
+
+    const restoreForm = $('#restore-form')
+    const restoreButtons = $$('.restore-btn')
+
+    restoreButtons.forEach(button => {
+        button.onclick = (e) => {
+            e.preventDefault()
+            pokemonId = e.target.dataset.id
+
+            restoreForm.action = `/pokemons/${pokemonId}/restore?_method=PATCH`
+            restoreForm.submit()
+        }
+    })
 
     const deleteModal = $('#delete-modal')
     const deleteForm = $('#delete-form')
     const deleteButton = $('#delete-button')
-    let pokemonId = ''
 
     deleteModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
@@ -76,7 +97,8 @@
     })
 
     deleteButton.onclick = () => {
-        deleteForm.action = `/pokemons/${pokemonId}?_method=DELETE`
+        deleteForm.action = `/pokemons/${pokemonId}/force?_method=DELETE`
         deleteForm.submit()
     }
+
 </script>

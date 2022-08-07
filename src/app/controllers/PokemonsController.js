@@ -35,7 +35,7 @@ class PokemonsController {
     // [POST] /pokemons/store
     store(req, res, next) {
         Pokemon.create(req.body)
-            .then((pokemon) => res.redirect(`/pokemons/${pokemon.slug}`))
+            .then((pokemon) => res.redirect(`/user/stored/pokemons`))
             .catch(next)
     }
 
@@ -59,6 +59,20 @@ class PokemonsController {
 
     // [DELETE] /pokemons/:id
     delete(req, res, next) {
+        Pokemon.delete({ _id: req.params.id })
+            .then((pokemon) => res.redirect('back'))
+            .catch(next)
+    }
+
+    // [PATCH] /pokemons/:id/restore
+    restore(req, res, next) {
+        Pokemon.restore({ _id: req.params.id })
+            .then((pokemon) => res.redirect('back'))
+            .catch(next)
+    }
+
+    // [DELETE] /pokemons/:id/force
+    forceDelete(req, res, next) {
         Pokemon.deleteOne({ _id: req.params.id })
             .then((pokemon) => res.redirect('back'))
             .catch(next)

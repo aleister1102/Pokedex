@@ -7,7 +7,9 @@ router.post('/store', pokemonsController.store)
 router.get('/:slug', pokemonsController.show)
 router.get('/:id/edit', pokemonsController.edit)
 router.put('/:id', pokemonsController.update)
+router.patch('/:id/restore', pokemonsController.restore)
 router.delete('/:id', pokemonsController.delete)
+router.delete('/:id/force', pokemonsController.forceDelete)
 router.get('/', pokemonsController.index)
 
 module.exports = router
