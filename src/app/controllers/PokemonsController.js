@@ -1,8 +1,11 @@
 const Pokemon = require('../models/Pokemon')
-const { multipleMongooseToObject } = require('../../utils/mongoose')
+const {
+    multipleMongooseToObject,
+    mongooseToObject,
+} = require('../../utils/mongoose')
 
 class PokemonsController {
-    // [GET] /news
+    // [GET] /pokemons
     index(req, res, next) {
         Pokemon.find({})
             .then((pokemons) => {
@@ -13,9 +16,15 @@ class PokemonsController {
             .catch(next)
     }
 
-    // [GET] /news/:slug
-    show(req, res) {
-        res.send('Pokemons DETAILED')
+    // [GET] /pokemons/:slug
+    show(req, res, next) {
+        Pokemon.findOne({ slug: req.params.slug })
+            .then((pokemon) => {
+                res.render('pokemons/show', {
+                    pokemon: mongooseToObject(pokemon),
+                })
+            })
+            .catch(next)
     }
 }
 

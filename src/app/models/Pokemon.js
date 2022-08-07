@@ -11,6 +11,7 @@ const Pokemon = new Schema({
     },
     createdAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
+    slug: { type: String },
 })
 
 module.exports = mongoose.model('Pokemon', Pokemon)
