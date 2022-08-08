@@ -9,7 +9,7 @@ const Pokemon = new Schema(
     {
         _id: { type: Number },
         name: { type: String, required: true },
-        type: { type: String },
+        type: { type: String, default: 'Normal' },
         image: {
             type: String,
             default:

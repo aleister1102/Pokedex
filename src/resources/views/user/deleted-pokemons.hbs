@@ -32,23 +32,24 @@
                 <th scope='col'>Type
                     {{{sortable 'type' _sort}}}
                 </th>
-                <th scope='col' colspan='2'> Deleted time
+                <th scope='col'> Deleted time
                     {{{sortable 'deletedAt' _sort}}}
                 </th>
+                <th>Operations</th>
             </tr>
         </thead>
         <tbody>
             {{#each deletedPokemons}}
             <tr>
-                <td>
+                <td scope="row">
                     <input class="form-check-input item-checkbox" type="checkbox" name="pokemonIds[]"
                         value="{{this._id}}" id="{{this._id}}">
                 </td>
-                <td scope='row'>{{this._id}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.type}}</td>
-                <td>{{this.deletedAt}}</td>
-                <td>
+                <td scope="row">{{this._id}}</td>
+                <td scope="row">{{this.name}}</td>
+                <td scope="row">{{this.type}}</td>
+                <td scope="row">{{this.deletedAt}}</td>
+                <td scope="row">
                     <a href='' class='btn btn-link restore-btn' data-id="{{this._id}}">Restore</a>
                     <a href='' class='btn btn-link' data-bs-toggle='modal' data-bs-target='#delete-modal'
                         data-bs-id='{{this._id}}'>Delete permanently</a>
@@ -57,7 +58,7 @@
 
             {{else}}
             <tr>
-                <td colspan='5' class="text-center">
+                <td colspan='6' class="text-center">
                     Empty.
                     <a href="/user/stored/pokemons">My pokemons</a>
                 </td>

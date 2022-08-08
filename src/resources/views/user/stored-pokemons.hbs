@@ -33,23 +33,24 @@
                 <th scope='col'>Type
                     {{{sortable 'type' _sort}}}
                 </th>
-                <th scope='col' colspan='2'> Created time
+                <th scope='col'> Created time
                     {{{sortable 'createdAt' _sort}}}
                 </th>
+                <th scope='col'> Operations</th>
             </tr>
         </thead>
         <tbody>
             {{#each pokemons}}
             <tr>
-                <td>
+                <td scope="row">
                     <input class="form-check-input item-checkbox" type="checkbox" name="pokemonIds[]"
                         value="{{this._id}}" id="{{this._id}}">
                 </td>
-                <td scope='row'>{{this._id}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.type}}</td>
-                <td>{{this.createdAt}}</td>
-                <td>
+                <td scope="row">{{this._id}}</td>
+                <td scope="row">{{this.name}}</td>
+                <td scope="row">{{this.type}}</td>
+                <td scope="row">{{this.createdAt}}</td>
+                <td scope="row">
                     <a href='/pokemons/{{this._id}}/edit' class='btn btn-link'>Edit</a>
                     <a href='' class='btn btn-link' data-bs-toggle='modal' data-bs-target='#delete-modal'
                         data-bs-id='{{this._id}}'>Delete</a>
@@ -58,7 +59,7 @@
 
             {{else}}
             <tr>
-                <td colspan='5' class="text-center">
+                <td colspan='6' class="text-center">
                     You don't have any pokemon.
                     <a href='/pokemons/add'>Add a new one</a>
                 </td>
