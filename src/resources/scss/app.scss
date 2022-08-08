@@ -8,6 +8,9 @@ a {
     width: 180px;
     margin: 0 16px;
 }
-.table tr th:nth-child(n + 3) {
+.table thead th:nth-child(n + 3) {
     width: 100px;
+}
+.table tbody td:nth-child(1) {
+    text-align: center;
 }
