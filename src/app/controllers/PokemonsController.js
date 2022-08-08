@@ -80,16 +80,29 @@ class PokemonsController {
 
     // [POST] /pokemons/handle-form-operations
     handleFormOperations(req, res, next) {
+        console.log(req.body)
         switch (req.body.operations) {
             case 'delete':
                 Pokemon.delete({ _id: { $in: req.body.pokemonIds } })
                     .then(() => res.redirect('back'))
                     .catch(next)
                 break
+            case 'restore':
+                Pokemon.restore({ _id: { $in: req.body.pokemonIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break
+            case 'permanentDelete':
+                Pokemon.deleteMany({ _id: { $in: req.body.pokemonIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break
             default:
-                res.json({ message: 'Operaion is invalid' })
+                res.json({ message: 'Operation is invalid' })
         }
     }
+
+    // [DELETE] /pokemons/handle-form-operations
 }
 
 module.exports = new PokemonsController()

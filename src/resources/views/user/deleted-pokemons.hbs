@@ -1,13 +1,28 @@
-<div class="mt-4">
+<form class="mt-4" name="container-form" method="POST" action="/pokemons/handle-form-operations">
     <div>
         <a href="/user/stored/pokemons">My pokemons</a>
         <h1>Deleted pokemons</h1>
 
+        <div class="mt-4 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="form-check-all">
+                <label class="form-check-label" for="form-check-all"> Select all </label>
+            </div>
+
+            <select class="form-control form-control-sm select-all-options" name="operations" required="true">
+                <option value="">---- Operation ----</option>
+                <option value="restore">Restore</option>
+                <option value="permanentDelete">Delete permanently</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary btn-perform disabled">Perform</button>
+        </div>
     </div>
 
     <table class='table'>
         <thead>
             <tr>
+                <th scope="col">Select</th>
                 <th scope='col'>#</th>
                 <th scope='col'>Name</th>
                 <th scope='col'>Type</th>
@@ -17,7 +32,11 @@
         <tbody>
             {{#each deletedPokemons}}
             <tr>
-                <th scope='row'>{{sum @index 1}}</th>
+                <td>
+                    <input class="form-check-input item-checkbox" type="checkbox" name="pokemonIds[]"
+                        value="{{this._id}}" id="{{this._id}}">
+                </td>
+                <td scope='row'>{{sum @index 1}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.type}}</td>
                 <td>{{this.deletedAt}}</td>
@@ -38,7 +57,7 @@
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 {{! Delete confirmation }}
 <div id='delete-modal' class='modal' tabindex='-1'>
@@ -74,6 +93,7 @@
 
     let pokemonId = ''
 
+    // Handle restore
     const restoreForm = $('#restore-form')
     const restoreButtons = $$('.restore-btn')
 
@@ -87,18 +107,68 @@
         }
     })
 
+    // Handle modal
     const deleteModal = $('#delete-modal')
-    const deleteForm = $('#delete-form')
-    const deleteButton = $('#delete-button')
 
     deleteModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
         pokemonId = button.getAttribute('data-bs-id')
     })
 
+    // Handle permanent delete
+    const deleteForm = $('#delete-form')
+    const deleteButton = $('#delete-button')
+
     deleteButton.onclick = () => {
         deleteForm.action = `/pokemons/${pokemonId}/force?_method=DELETE`
         deleteForm.submit()
     }
 
+    // Handle check all checkbox
+    const selectAllCheckbox = $('#form-check-all')
+    const itemCheckboxes = $$('.item-checkbox')
+
+    selectAllCheckbox.onchange = (e) => {
+        const isAllChecked = e.target.checked
+
+        itemCheckboxes.forEach((checkbox) => {
+            checkbox.checked = isAllChecked
+        })
+
+        renderCheckAllButton()
+    }
+
+    // Handle item checkboxes
+    itemCheckboxes.forEach(checkbox => {
+        checkbox.onchange = (e) => {
+            const isAllChecked = itemCheckboxes.length === $$('input[name="pokemonIds[]"]:checked').length
+
+            selectAllCheckbox.checked = isAllChecked
+            renderCheckAllButton()
+        }
+    })
+
+    // Rerender submit button
+    const submitButton = $('.btn-perform')
+
+    function renderCheckAllButton() {
+        const checkedBoxesCount = $$('input[name="pokemonIds[]"]:checked').length
+
+        if (checkedBoxesCount)
+            submitButton.classList.remove('disabled')
+        else
+            submitButton.classList.add('disabled')
+    }
+    renderCheckAllButton()
+
+    // Handle submit button
+    const selectAllOptions = $('.select-all-options')
+
+    submitButton.onsubmit = (e) => {
+        const operation = selectAllOptions.value
+
+        if (operation) {
+            e.preventDefault()
+        }
+    }
 </script>
