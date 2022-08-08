@@ -29,7 +29,15 @@ class UserController {
 
     // [GET] /trash/pokemons
     showDeletedPokemons(req, res, next) {
-        Pokemon.findDeleted()
+        let pokemonQuery = Pokemon.findDeleted()
+
+        if (req.query.hasOwnProperty('_sort')) {
+            pokemonQuery = pokemonQuery.sort({
+                [req.query.column]: req.query.type,
+            })
+        }
+
+        pokemonQuery
             .then((deletedPokemons) =>
                 res.render('user/deleted-pokemons', {
                     deletedPokemons: multipleMongooseToObject(deletedPokemons),

@@ -23,10 +23,18 @@
         <thead>
             <tr>
                 <th scope="col">Select</th>
-                <th scope='col'>#</th>
-                <th scope='col'>Name</th>
-                <th scope='col'>Type</th>
-                <th scope='col' colspan='2'>Deleted time</th>
+                <th scope='col'>ID
+                    {{{sortable '_id' _sort}}}
+                </th>
+                <th scope='col'>Name
+                    {{{sortable 'name' _sort}}}
+                </th>
+                <th scope='col'>Type
+                    {{{sortable 'type' _sort}}}
+                </th>
+                <th scope='col' colspan='2'> Deleted time
+                    {{{sortable 'deletedAt' _sort}}}
+                </th>
             </tr>
         </thead>
         <tbody>
