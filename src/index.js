@@ -2,11 +2,9 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
-var methodOverride = require('method-override')
+const methodOverride = require('method-override')
 
-const { JSDOM } = require('jsdom')
-const { window } = new JSDOM('')
-const $ = require('jquery')(window)
+const SortMiddleware = require('./app/middlewares/SortMiddleware')
 
 const routing = require('./routers')
 const db = require('./config/db')
@@ -20,9 +18,12 @@ const port = 3000
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Middleware
+// Middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+// Custom middlewares
+app.use(SortMiddleware)
 
 // HTTP logger
 app.use(morgan('tiny'))
@@ -37,6 +38,27 @@ app.engine(
         extname: 'hbs',
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : 'default'
+
+                const icons = {
+                    default: 'fas fa-sort',
+                    asc: 'fa-solid fa-arrow-down-short-wide',
+                    desc: 'fa-solid fa-arrow-up-wide-short',
+                }
+                const types = {
+                    default: 'desc',
+                    asc: 'desc',
+                    desc: 'asc',
+                }
+                const icon = icons[sortType]
+                const type = types[sortType]
+
+                return `
+                <a href="?_sort&column=${field}&type=${type}">
+                    <i class="${icon}"></i>
+                </a>`
+            },
         },
     })
 )
