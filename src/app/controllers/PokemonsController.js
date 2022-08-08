@@ -1,21 +1,7 @@
 const Pokemon = require('../models/Pokemon')
-const {
-    multipleMongooseToObject,
-    mongooseToObject,
-} = require('../../utils/mongoose')
+const { mongooseToObject } = require('../../utils/mongoose')
 
 class PokemonsController {
-    // [GET] /pokemons
-    index(req, res, next) {
-        Pokemon.find({})
-            .then((pokemons) => {
-                res.render('pokemons', {
-                    pokemons: multipleMongooseToObject(pokemons),
-                })
-            })
-            .catch(next)
-    }
-
     // [GET] /pokemons/:slug
     show(req, res, next) {
         Pokemon.findOne({ slug: req.params.slug })
@@ -101,8 +87,6 @@ class PokemonsController {
                 res.json({ message: 'Operation is invalid' })
         }
     }
-
-    // [DELETE] /pokemons/handle-form-operations
 }
 
 module.exports = new PokemonsController()

@@ -1,9 +1,16 @@
 const Pokemon = require('../models/Pokemon')
+const { multipleMongooseToObject } = require('../../utils/mongoose')
 
 class SiteController {
     // [GET] /
-    index(req, res) {
-        res.render('home')
+    show(req, res, next) {
+        Pokemon.find({})
+            .then((pokemons) => {
+                res.render('home', {
+                    pokemons: multipleMongooseToObject(pokemons),
+                })
+            })
+            .catch(next)
     }
 }
 

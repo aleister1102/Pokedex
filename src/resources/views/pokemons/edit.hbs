@@ -3,44 +3,20 @@
     <form method='POST' action='/pokemons/{{pokemon._id}}?_method=PUT'>
         <div class='mb-3'>
             <label for='pokemon-name' class='form-label'>Name</label>
-            <input
-                type='text'
-                class='form-control'
-                id='pokemon-name'
-                name='name'
-                value='{{pokemon.name}}'
-            />
+            <input type='text' class='form-control' id='pokemon-name' name='name' value='{{pokemon.name}}' />
         </div>
         <div class='mb-3'>
             <label for='pokemon-type' class='form-label'>Type</label>
-            <input
-                type='text'
-                class='form-control'
-                id='pokemon-type'
-                name='type'
-                value='{{pokemon.type}}'
-            />
+            <input type='text' class='form-control' id='pokemon-type' name='type' value='{{pokemon.type}}' />
         </div>
         <div class='mb-3'>
             <label for='pokemon-image' class='form-label'>Image</label>
-            <input
-                type='text'
-                class='form-control'
-                id='pokemon-image'
-                name='image'
-                value='{{pokemon.image}}'
-            />
+            <input type='text' class='form-control' id='pokemon-image' name='image' value='{{pokemon.image}}' />
         </div>
         <div class='mb-3'>
-            <label
-                for='pokemon-description'
-                class='form-label'
-            >Description</label>
-            <textarea
-                class='form-control'
-                id='pokemon-description'
-                name='description'
-            >{{pokemon.description}}</textarea>
+            <label for='pokemon-description' class='form-label'>Description</label>
+            <textarea class='form-control' id='pokemon-description'
+                name='description'>{{pokemon.description}}</textarea>
         </div>
         <button type='submit' class='btn btn-primary'>Update</button>
     </form>
