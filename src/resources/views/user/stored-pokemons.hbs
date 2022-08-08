@@ -24,15 +24,16 @@
         <thead>
             <tr>
                 <th scope="col">Select</th>
-                <th scope='col'>#</th>
+                <th scope='col'>ID
+                    {{{sortable '_id' _sort}}}
+                </th>
                 <th scope='col'>Name
                     {{{sortable 'name' _sort}}}
                 </th>
                 <th scope='col'>Type
                     {{{sortable 'type' _sort}}}
                 </th>
-                <th scope='col' colspan='2'>
-                    Created time
+                <th scope='col' colspan='2'> Created time
                     {{{sortable 'createdAt' _sort}}}
                 </th>
             </tr>
@@ -44,7 +45,7 @@
                     <input class="form-check-input item-checkbox" type="checkbox" name="pokemonIds[]"
                         value="{{this._id}}" id="{{this._id}}">
                 </td>
-                <td scope='row'>{{sum @index 1}}</td>
+                <td scope='row'>{{this._id}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.type}}</td>
                 <td>{{this.createdAt}}</td>
@@ -101,6 +102,7 @@
 
     deleteModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
+        console.log(button)
         pokemonId = button.getAttribute('data-bs-id')
     })
 

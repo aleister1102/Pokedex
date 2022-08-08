@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const Schema = mongoose.Schema
 
 const Pokemon = new Schema(
     {
+        _id: { type: Number },
         name: { type: String, required: true },
         type: { type: String },
         image: {
@@ -20,6 +22,7 @@ const Pokemon = new Schema(
         deletedAt: { type: Date },
     },
     {
+        _id: false,
         timestamps: true,
     }
 )
@@ -27,5 +30,6 @@ const Pokemon = new Schema(
 // Add plugins
 mongoose.plugin(slug)
 Pokemon.plugin(mongooseDelete, { overrideMethods: 'all' })
+Pokemon.plugin(AutoIncrement)
 
 module.exports = mongoose.model('Pokemon', Pokemon)
