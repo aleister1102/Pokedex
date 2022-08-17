@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "scripts": {
         "format": "lint-staged",
-        "start": "node src/index.js",
+        "start": "serve",
         "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -20,8 +20,8 @@
     },
     "homepage": "https://github.com/marucube35/coding-blog#readme",
     "dependencies": {
-        "express": "^4.18.1",
         "bootstrap": "^5.2.0",
+        "express": "^4.18.1",
         "express-handlebars": "^6.0.6",
         "husky": "^8.0.1",
         "lint-staged": "^13.0.3",
@@ -34,5 +34,8 @@
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.19",
         "prettier": "^2.7.1"
+    },
+    "peerDependencies": {
+        "serve": "^14.0.1"
     }
 }
