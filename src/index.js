@@ -13,7 +13,7 @@ const db = require('./config/db')
 db.connect()
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
@@ -67,6 +67,6 @@ app.set('views', path.join(__dirname, 'resources', 'views'))
 // Routes
 routing(app)
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`)
 })
