@@ -34,8 +34,5 @@
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.19",
         "prettier": "^2.7.1"
-    },
-    "peerDependencies": {
-        "serve": "^14.0.1"
     }
 }
