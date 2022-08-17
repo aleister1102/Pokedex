@@ -1,0 +1,29 @@
+.container {
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.select-all-options {
+    text-align: center;
+    width: 180px;
+    margin: 0 16px;
+}
+
+.table thead th {
+    min-width: 80px;
+}
+
+.card {
+    height: 100%;
+}
+.card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.card .card-body .btn {
+    margin-top: auto;
+}
