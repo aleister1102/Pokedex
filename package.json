@@ -33,6 +33,7 @@
         "morgan": "^1.10.0",
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.19",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "serve": "^14.0.1"
     }
 }
