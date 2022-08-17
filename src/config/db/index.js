@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
-
+const MONGODB_URI =
+    'mongodb+srv://marucube34:p8FecTSGns9e0bSp@cluster0.tvoo6ju.mongodb.net/pokedex_dev?retryWrites=true&w=majority'
 async function connect() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/pokedex_dev', {
+        await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
