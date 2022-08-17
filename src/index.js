@@ -3,6 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
+require('dotenv').config()
 
 const SortMiddleware = require('./app/middlewares/SortMiddleware')
 
